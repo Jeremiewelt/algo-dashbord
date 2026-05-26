@@ -6,97 +6,74 @@
 <title>Algo Trading Dashboard</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; min-height: 100vh; }
-
-#login-screen {
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
-}
-.login-box {
-  background: #111; border: 1px solid #222; border-radius: 16px;
-  padding: 48px; width: 380px; text-align: center;
-}
-.login-box h1 { font-size: 20px; font-weight: 500; margin-bottom: 8px; }
-.login-box p { font-size: 13px; color: #666; margin-bottom: 32px; }
-.login-box input {
-  width: 100%; padding: 12px 16px; background: #1a1a1a; border: 1px solid #333;
-  border-radius: 8px; color: #fff; font-size: 14px; margin-bottom: 12px;
-  outline: none;
-}
-.login-box input:focus { border-color: #555; }
-.login-box button {
-  width: 100%; padding: 12px; background: #fff; color: #000;
-  border: none; border-radius: 8px; font-size: 14px; font-weight: 500;
-  cursor: pointer;
-}
-.login-box button:hover { background: #e5e5e5; }
-.error-msg { color: #ef4444; font-size: 12px; margin-top: 8px; display: none; }
-
-#dashboard { display: none; padding: 24px; max-width: 1200px; margin: 0 auto; }
-
-.header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-.header h1 { font-size: 20px; font-weight: 500; }
-.header-right { display: flex; gap: 12px; align-items: center; }
-.badge { background: #1a1a1a; border: 1px solid #222; padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #666; }
-.logout-btn { background: transparent; border: 1px solid #333; color: #666; padding: 6px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; }
-.logout-btn:hover { border-color: #555; color: #fff; }
-
-.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px; }
-.metric-card { background: #111; border: 1px solid #1a1a1a; border-radius: 12px; padding: 16px; }
-.metric-label { font-size: 11px; color: #666; margin-bottom: 6px; }
-.metric-value { font-size: 22px; font-weight: 500; }
-.metric-sub { font-size: 11px; margin-top: 4px; }
-.positive { color: #22c55e; }
-.negative { color: #ef4444; }
-.neutral { color: #888; }
-
-.section-title { font-size: 14px; font-weight: 500; margin-bottom: 12px; color: #ccc; }
-
-.chart-container { background: #111; border: 1px solid #1a1a1a; border-radius: 12px; padding: 20px; margin-bottom: 24px; }
-.chart-legend { display: flex; gap: 16px; margin-bottom: 16px; }
-.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #666; }
-.legend-dot { width: 10px; height: 3px; border-radius: 2px; }
-
-.algos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 24px; }
-.algo-card { background: #111; border: 1px solid #1a1a1a; border-radius: 12px; padding: 16px; }
-.algo-card.active { border-color: #3b82f6; }
-.algo-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-.algo-name { font-size: 13px; font-weight: 500; }
-.algo-sub { font-size: 11px; color: #555; margin-top: 2px; }
-.status-badge { font-size: 10px; padding: 2px 8px; border-radius: 20px; }
-.status-active { background: #1e3a5f; color: #60a5fa; }
-.status-soon { background: #1a1a1a; color: #555; }
-.algo-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.algo-stat-label { font-size: 10px; color: #555; margin-bottom: 2px; }
-.algo-stat-value { font-size: 15px; font-weight: 500; }
-.progress-bar { height: 4px; background: #1a1a1a; border-radius: 2px; margin-top: 10px; overflow: hidden; }
-.progress-fill { height: 100%; border-radius: 2px; background: #22c55e; }
-
-.trades-table { background: #111; border: 1px solid #1a1a1a; border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
-.trades-table table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.trades-table th { padding: 10px 14px; text-align: left; font-weight: 500; color: #555; background: #0f0f0f; }
-.trades-table td { padding: 10px 14px; border-top: 1px solid #1a1a1a; }
-.pill { font-size: 10px; padding: 2px 8px; border-radius: 20px; display: inline-block; }
-.pill-buy { background: #14532d; color: #4ade80; }
-.pill-sell { background: #450a0a; color: #f87171; }
-.pill-tp { background: #14532d; color: #4ade80; }
-.pill-stop { background: #450a0a; color: #f87171; }
-.pill-range { background: #1e1b4b; color: #818cf8; }
-.pill-tendance { background: #1c1917; color: #a8a29e; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0a;color:#fff;min-height:100vh}
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center}
+.login-box{background:#111;border:1px solid #222;border-radius:16px;padding:48px;width:380px;text-align:center}
+.login-box h1{font-size:20px;font-weight:500;margin-bottom:8px}
+.login-box p{font-size:13px;color:#666;margin-bottom:32px}
+.login-box input{width:100%;padding:12px 16px;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#fff;font-size:14px;margin-bottom:12px;outline:none}
+.login-box input:focus{border-color:#555}
+.login-box button{width:100%;padding:12px;background:#fff;color:#000;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer}
+.login-box button:hover{background:#e5e5e5}
+.error-msg{color:#ef4444;font-size:12px;margin-top:8px;display:none}
+#dashboard{display:none;padding:24px;max-width:1200px;margin:0 auto}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.header h1{font-size:20px;font-weight:500}
+.header-right{display:flex;gap:12px;align-items:center}
+.badge{background:#1a1a1a;border:1px solid #222;padding:4px 12px;border-radius:20px;font-size:12px;color:#666}
+.logout-btn{background:transparent;border:1px solid #333;color:#666;padding:6px 14px;border-radius:8px;font-size:12px;cursor:pointer}
+.logout-btn:hover{border-color:#555;color:#fff}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:24px}
+.metric-card{background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:16px}
+.metric-label{font-size:11px;color:#666;margin-bottom:6px}
+.metric-value{font-size:22px;font-weight:500}
+.metric-sub{font-size:11px;margin-top:4px}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.neutral{color:#888}
+.section-title{font-size:14px;font-weight:500;margin-bottom:12px;color:#ccc}
+.chart-container{background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:20px;margin-bottom:24px}
+.chart-legend{display:flex;gap:16px;margin-bottom:16px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:12px;color:#666}
+.legend-dot{width:10px;height:3px;border-radius:2px}
+.algos-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:24px}
+.algo-card{background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:16px}
+.algo-card.active{border-color:#3b82f6}
+.algo-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.algo-name{font-size:13px;font-weight:500}
+.algo-sub{font-size:11px;color:#555;margin-top:2px}
+.status-badge{font-size:10px;padding:2px 8px;border-radius:20px}
+.status-active{background:#1e3a5f;color:#60a5fa}
+.status-soon{background:#1a1a1a;color:#555}
+.algo-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.algo-stat-label{font-size:10px;color:#555;margin-bottom:2px}
+.algo-stat-value{font-size:15px;font-weight:500}
+.progress-bar{height:4px;background:#1a1a1a;border-radius:2px;margin-top:10px;overflow:hidden}
+.progress-fill{height:100%;border-radius:2px;background:#22c55e}
+.trades-table{background:#111;border:1px solid #1a1a1a;border-radius:12px;overflow:hidden;margin-bottom:24px}
+.trades-table table{width:100%;border-collapse:collapse;font-size:12px}
+.trades-table th{padding:10px 14px;text-align:left;font-weight:500;color:#555;background:#0f0f0f}
+.trades-table td{padding:10px 14px;border-top:1px solid #1a1a1a}
+.pill{font-size:10px;padding:2px 8px;border-radius:20px;display:inline-block}
+.pill-buy{background:#14532d;color:#4ade80}
+.pill-sell{background:#450a0a;color:#f87171}
+.pill-tp{background:#14532d;color:#4ade80}
+.pill-stop{background:#450a0a;color:#f87171}
+.pill-range{background:#1e1b4b;color:#818cf8}
+.pill-tendance{background:#1c1917;color:#a8a29e}
 </style>
 </head>
 <body>
-
 <div id="login-screen">
   <div class="login-box">
     <h1>Algo Trading</h1>
     <p>Accès privé — entrez votre mot de passe</p>
-    <input type="password" id="password-input" placeholder="Mot de passe" onkeydown="if(event.key==='Enter') checkPassword()">
+    <input type="password" id="password-input" placeholder="Mot de passe" onkeydown="if(event.key==='Enter')checkPassword()">
     <button onclick="checkPassword()">Accéder au dashboard</button>
     <div class="error-msg" id="error-msg">Mot de passe incorrect</div>
   </div>
 </div>
-
 <div id="dashboard">
   <div class="header">
     <div>
@@ -108,7 +85,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <button class="logout-btn" onclick="logout()">Déconnexion</button>
     </div>
   </div>
-
   <div class="metrics">
     <div class="metric-card">
       <div class="metric-label">Capital total</div>
@@ -141,18 +117,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="metric-sub neutral">limite -25%</div>
     </div>
   </div>
-
   <div class="chart-container">
     <div class="section-title">Evolution du capital</div>
     <div class="chart-legend">
       <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div>Algo BTC/USDT</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6;border-top:2px dashed #3b82f6;height:0"></div>Capital initial</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div>Capital initial</div>
     </div>
     <div style="position:relative;height:220px;">
-      <canvas id="perf-chart" role="img" aria-label="Courbe d'évolution du capital"></canvas>
+      <canvas id="perf-chart" role="img" aria-label="Evolution du capital"></canvas>
     </div>
   </div>
-
   <div class="section-title">Algos actifs</div>
   <div class="algos-grid">
     <div class="algo-card active">
@@ -202,7 +176,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       </div>
     </div>
   </div>
-
   <div class="section-title">Derniers trades</div>
   <div class="trades-table">
     <table>
@@ -218,14 +191,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </tr>
       </thead>
       <tbody id="trades-body">
-        <tr><td colspan="7" style="text-align:center;color:#555;padding:24px;">Chargement des trades...</td></tr>
+        <tr><td colspan="7" style="text-align:center;color:#555;padding:24px;">Aucun trade enregistré</td></tr>
       </tbody>
     </table>
   </div>
 </div>
-
 <script>
-const PASSWORD = ‘Rocket’;
+const PASSWORD = 'Rocket';
 const CAPITAL_INITIAL = 3000;
 
 function checkPassword() {
@@ -248,8 +220,8 @@ function logout() {
 function showDashboard() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
-  loadData();
   fetchBTCPrice();
+  loadTrades();
   setInterval(fetchBTCPrice, 60000);
 }
 
@@ -257,37 +229,35 @@ async function fetchBTCPrice() {
   try {
     const r = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
     const d = await r.json();
-    const price = parseFloat(d.price).toLocaleString('fr-FR', {maximumFractionDigits: 0});
+    const price = parseFloat(d.price).toLocaleString('fr-FR', {maximumFractionDigits:0});
     document.getElementById('btc-price').textContent = 'BTC: ' + price + '$';
   } catch(e) {}
 }
 
-function loadData() {
-  const trades = JSON.parse(localStorage.getItem('trades') || '[]');
+function loadTrades() {
+  const trades = JSON.parse(localStorage.getItem('algo_trades') || '[]');
   updateMetrics(trades);
   updateChart(trades);
   updateTradesTable(trades);
 }
 
 function updateMetrics(trades) {
-  const capital = CAPITAL_INITIAL + trades.reduce((s, t) => s + t.pnl, 0);
-  const perf = ((capital - CAPITAL_INITIAL) / CAPITAL_INITIAL * 100).toFixed(1);
-  const pnl = capital - CAPITAL_INITIAL;
+  const pnl = trades.reduce((s, t) => s + t.pnl, 0);
+  const capital = CAPITAL_INITIAL + pnl;
+  const perf = ((pnl / CAPITAL_INITIAL) * 100).toFixed(1);
   const wins = trades.filter(t => t.pnl > 0).length;
   const wr = trades.length > 0 ? Math.round(wins / trades.length * 100) : 0;
   const best = trades.length > 0 ? Math.max(...trades.map(t => t.pnl)) : 0;
   const worst = trades.length > 0 ? Math.min(...trades.map(t => t.pnl)) : 0;
-
-  let runningCapital = CAPITAL_INITIAL;
   let peak = CAPITAL_INITIAL;
+  let running = CAPITAL_INITIAL;
   let maxDD = 0;
   trades.forEach(t => {
-    runningCapital += t.pnl;
-    if (runningCapital > peak) peak = runningCapital;
-    const dd = (runningCapital - peak) / peak * 100;
+    running += t.pnl;
+    if (running > peak) peak = running;
+    const dd = (running - peak) / peak * 100;
     if (dd < maxDD) maxDD = dd;
   });
-
   document.getElementById('m-capital').textContent = Math.round(capital).toLocaleString('fr-FR') + '€';
   document.getElementById('m-perf').textContent = (perf >= 0 ? '+' : '') + perf + '%';
   document.getElementById('m-perf').className = 'metric-sub ' + (perf >= 0 ? 'positive' : 'negative');
@@ -298,7 +268,6 @@ function updateMetrics(trades) {
   document.getElementById('m-best').textContent = '+' + Math.round(best) + '€';
   document.getElementById('m-worst').textContent = Math.round(worst) + '€';
   document.getElementById('m-drawdown').textContent = maxDD.toFixed(1) + '%';
-
   document.getElementById('a1-pnl').textContent = (pnl >= 0 ? '+' : '') + Math.round(pnl) + '€';
   document.getElementById('a1-wr').textContent = trades.length > 0 ? wr + '%' : '—';
   document.getElementById('a1-trades').textContent = trades.length;
@@ -307,18 +276,15 @@ function updateMetrics(trades) {
 }
 
 function updateChart(trades) {
-  const labels = [];
-  const data = [];
+  const labels = ['Début'];
+  const data = [CAPITAL_INITIAL];
   let capital = CAPITAL_INITIAL;
-  labels.push('Début');
-  data.push(capital);
   trades.forEach(t => {
     capital += t.pnl;
     const date = new Date(t.date);
     labels.push(date.toLocaleDateString('fr-FR', {day:'2-digit', month:'2-digit'}));
     data.push(Math.round(capital));
   });
-
   if (window.perfChart) window.perfChart.destroy();
   const ctx = document.getElementById('perf-chart').getContext('2d');
   window.perfChart = new Chart(ctx, {
@@ -326,34 +292,16 @@ function updateChart(trades) {
     data: {
       labels,
       datasets: [
-        {
-          label: 'Capital',
-          data,
-          borderColor: '#22c55e',
-          backgroundColor: 'rgba(34,197,94,0.08)',
-          borderWidth: 2,
-          pointRadius: 3,
-          fill: true,
-          tension: 0.4
-        },
-        {
-          label: 'Initial',
-          data: Array(labels.length).fill(CAPITAL_INITIAL),
-          borderColor: '#3b82f6',
-          backgroundColor: 'transparent',
-          borderWidth: 1,
-          borderDash: [4, 4],
-          pointRadius: 0
-        }
+        {label:'Capital', data, borderColor:'#22c55e', backgroundColor:'rgba(34,197,94,0.08)', borderWidth:2, pointRadius:3, fill:true, tension:0.4},
+        {label:'Initial', data:Array(labels.length).fill(CAPITAL_INITIAL), borderColor:'#3b82f6', backgroundColor:'transparent', borderWidth:1, borderDash:[4,4], pointRadius:0}
       ]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { grid: { color: '#1a1a1a' }, ticks: { color: '#555', font: { size: 11 } } },
-        y: { grid: { color: '#1a1a1a' }, ticks: { color: '#555', font: { size: 11 }, callback: v => v + '€' } }
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{color:'#1a1a1a'}, ticks:{color:'#555', font:{size:11}}},
+        y:{grid:{color:'#1a1a1a'}, ticks:{color:'#555', font:{size:11}, callback:v=>v+'€'}}
       }
     }
   });
@@ -370,15 +318,15 @@ function updateTradesTable(trades) {
     const date = new Date(t.date).toLocaleDateString('fr-FR', {day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit'});
     const pnlColor = t.pnl >= 0 ? '#22c55e' : '#ef4444';
     const pnlStr = (t.pnl >= 0 ? '+' : '') + Math.round(t.pnl) + '€';
-    return `<tr>
-      <td style="color:#666">${date}</td>
-      <td><span class="pill ${t.sens === 'BUY' ? 'pill-buy' : 'pill-sell'}">${t.sens}</span></td>
-      <td><span class="pill ${t.regime === 'range' ? 'pill-range' : 'pill-tendance'}">${t.regime}</span></td>
-      <td style="color:#888">${t.entree ? Math.round(t.entree).toLocaleString('fr-FR') + '$' : '—'}</td>
-      <td style="color:#888">${t.sortie ? Math.round(t.sortie).toLocaleString('fr-FR') + '$' : '—'}</td>
-      <td><span class="pill ${t.raison === 'take_profit' ? 'pill-tp' : 'pill-stop'}">${t.raison}</span></td>
-      <td style="text-align:right;font-weight:500;color:${pnlColor}">${pnlStr}</td>
-    </tr>`;
+    return '<tr>' +
+      '<td style="color:#666">' + date + '</td>' +
+      '<td><span class="pill ' + (t.sens === 'BUY' ? 'pill-buy' : 'pill-sell') + '">' + t.sens + '</span></td>' +
+      '<td><span class="pill ' + (t.regime === 'range' ? 'pill-range' : 'pill-tendance') + '">' + (t.regime || '—') + '</span></td>' +
+      '<td style="color:#888">' + (t.entree ? Math.round(t.entree).toLocaleString('fr-FR') + '$' : '—') + '</td>' +
+      '<td style="color:#888">' + (t.sortie ? Math.round(t.sortie).toLocaleString('fr-FR') + '$' : '—') + '</td>' +
+      '<td><span class="pill ' + (t.raison === 'take_profit' ? 'pill-tp' : 'pill-stop') + '">' + (t.raison || '—') + '</span></td>' +
+      '<td style="text-align:right;font-weight:500;color:' + pnlColor + '">' + pnlStr + '</td>' +
+      '</tr>';
   }).join('');
 }
 
