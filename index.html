@@ -234,8 +234,9 @@ async function fetchBTCPrice() {
   } catch(e) {}
 }
 
-function loadTrades() {
-  const trades = JSON.parse(localStorage.getItem('algo_trades') || '[]');
+async function loadTrades() {
+  const response = await fetch('http://187.127.227.156:8080');
+const trades = await response.json();
   updateMetrics(trades);
   updateChart(trades);
   updateTradesTable(trades);
