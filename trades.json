@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "date": "2026-05-29T02:55:22.682370",
+    "sens": "BUY",
+    "entree": 73669.12,
+    "sortie": 73264.0,
+    "pnl": -331.63,
+    "regime": "range",
+    "raison": "stop",
+    "macro_score": 3
+  }
+]
