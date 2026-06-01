@@ -8,5 +8,15 @@
     "regime": "range",
     "raison": "stop",
     "macro_score": 3
+  },
+  {
+    "date": "2026-06-01T12:16:58.199470",
+    "sens": "SELL",
+    "entree": 72804.26,
+    "sortie": 72080.46,
+    "pnl": 497.69,
+    "regime": "tendance",
+    "raison": "take_profit",
+    "macro_score": 1
   }
 ]
