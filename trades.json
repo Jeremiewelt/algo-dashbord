@@ -48,5 +48,15 @@
     "regime": "tendance",
     "raison": "take_profit",
     "macro_score": 1
+  },
+  {
+    "date": "2026-06-07T08:58:02.146479",
+    "sens": "BUY",
+    "entree": 61785.99,
+    "sortie": 62867.24,
+    "pnl": 1322.4,
+    "regime": "tendance",
+    "raison": "take_profit",
+    "macro_score": 1
   }
 ]
