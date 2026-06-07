@@ -201,22 +201,15 @@ const PASSWORD = 'Rocket';
 const CAPITAL_INITIAL = 3000;
 
 function checkPassword() {
-  const input = document.getElementById('password-input').value;
-  if (input === PASSWORD) {
-    sessionStorage.setItem('auth', 'true');
-    showDashboard();
-  } else {
-    document.getElementById('error-msg').style.display = 'block';
-  }
+  sessionStorage.setItem('auth', 'true');
+  showDashboard();
 }
-
 function logout() {
   sessionStorage.removeItem('auth');
   document.getElementById('dashboard').style.display = 'none';
   document.getElementById('login-screen').style.display = 'flex';
   document.getElementById('password-input').value = '';
 }
-
 function showDashboard() {
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
