@@ -78,5 +78,15 @@
     "regime": "tendance",
     "raison": "stop",
     "macro_score": 1
+  },
+  {
+    "date": "2026-06-11T17:24:00.168091",
+    "sens": "BUY",
+    "entree": 62900.92,
+    "sortie": 62398.91,
+    "pnl": -295.16,
+    "regime": "tendance",
+    "raison": "stop",
+    "macro_score": 0
   }
 ]
